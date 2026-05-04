@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+/* ─── Google Fonts ───────────────────────────────────────── */
+/* Loaded via index.html <link> tags — Nunito + Lato */
+
+/* ─── CSS Custom Properties — Nature / Eco-Green Palette ── */
+:root {
+  /* Brand */
+  --brand-primary:       #2d6a4f;
+  --brand-primary-light: #52b788;
+  --brand-secondary:     #95d5b2;
+  --brand-accent:        #d4a373;
+  --brand-accent-light:  #e9c46a;
+  --brand-earth:         #a98467;
+
+  /* Surfaces */
+  --surface-bg:          #f0f7f0;
+  --surface-card:        #ffffff;
+  --surface-sidebar:     #1b4332;
+  --surface-topbar:      rgba(240, 247, 240, 0.92);
+  --surface-input:       #ffffff;
+
+  /* Borders */
+  --border-color:        #b7e4c7;
+  --border-subtle:       #d8f3dc;
+
+  /* Text */
+  --text-primary:        #1a3226;
+  --text-secondary:      #3a6351;
+  --text-muted:          #74a98c;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px 0 rgb(45 106 79 / 0.08), 0 1px 2px -1px rgb(45 106 79 / 0.05);
+  --shadow-md: 0 4px 16px -2px rgb(45 106 79 / 0.12), 0 2px 6px -2px rgb(45 106 79 / 0.06);
+  --shadow-lg: 0 10px 32px -4px rgb(45 106 79 / 0.14), 0 4px 12px -4px rgb(45 106 79 / 0.08);
+  --shadow-glow-green:   0 0 24px rgb(82 183 136 / 0.22);
+  --shadow-glow-earth:   0 0 24px rgb(212 163 115 / 0.22);
+}
+
+html.dark {
+  --surface-bg:          #0d1f17;
+  --surface-card:        #122519;
+  --surface-sidebar:     #0a1a10;
+  --surface-topbar:      rgba(13, 31, 23, 0.92);
+  --surface-input:       #1a3226;
+
+  --border-color:        #1e4d32;
+  --border-subtle:       #163829;
+
+  --text-primary:        #d8f3dc;
+  --text-secondary:      #95d5b2;
+  --text-muted:          #52b788;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+@layer base {
+  html, body {
+    height: 100%;
+  }
+  body {
+    font-family: 'Nunito', 'Lato', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    background: var(--surface-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #95d5b2; border-radius: 99px; }
+  html.dark ::-webkit-scrollbar-thumb { background: #2d6a4f; }
+}
+
+/* ─── Keyframe Animations ────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes growUp {
+  from { opacity: 0; transform: scaleY(0.85) translateY(10px); }
+  to   { opacity: 1; transform: scaleY(1) translateY(0); }
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50%       { transform: rotate(3deg) scale(1.04); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.08); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(82 183 136 / 0.4); }
+  50%       { box-shadow: 0 0 0 8px rgb(82 183 136 / 0); }
+}
+
+/* ─── Utility / Animation Classes ───────────────────────── */
+.animate-fadeInUp  { animation: fadeInUp 0.48s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fadeIn    { animation: fadeIn 0.32s ease both; }
+.animate-growUp    { animation: growUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-leafSway  { animation: leafSway 4s ease-in-out infinite; }
+.animate-countUp   { animation: countUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ─── Skeleton Shimmer ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #d8f3dc 25%, #b7e4c7 50%, #d8f3dc 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 8px;
+}
+
+html.dark .skeleton {
+  background: linear-gradient(90deg, #1e4d32 25%, #163829 50%, #1e4d32 75%);
+  background-size: 800px 100%;
+}
+
+/* ─── Leaf Background Pattern ────────────────────────────── */
+.leaf-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 C20 15, 10 25, 20 40 C25 48, 35 50, 40 45 C50 35, 45 15, 30 5Z' fill='%2352b788' opacity='0.06'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+html.dark .leaf-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 C20 15, 10 25, 20 40 C25 48, 35 50, 40 45 C50 35, 45 15, 30 5Z' fill='%232d6a4f' opacity='0.15'/%3E%3C/svg%3E");
+}
+
+/* ─── Glassmorphism Card ─────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(183, 228, 199, 0.6);
+}
+
+html.dark .glass-card {
+  background: rgba(18, 37, 25, 0.72);
+  border: 1px solid rgba(45, 106, 79, 0.4);
+}
+
+/* ─── Stat Card Glows ────────────────────────────────────── */
+.stat-card-forest  { box-shadow: var(--shadow-md), 0 0 0 1px rgb(45 106 79 / 0.14); }
+.stat-card-sage    { box-shadow: var(--shadow-md), 0 0 0 1px rgb(82 183 136 / 0.14); }
+.stat-card-earth   { box-shadow: var(--shadow-md), 0 0 0 1px rgb(212 163 115 / 0.14); }
+.stat-card-amber   { box-shadow: var(--shadow-md), 0 0 0 1px rgb(233 196 106 / 0.14); }
+
+/* ─── Nav Links ──────────────────────────────────────────── */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(216, 243, 220, 0.72);
+  transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: rgba(82, 183, 136, 0.15);
+  color: #d8f3dc;
+  transform: translateX(3px);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, #52b788, #2d6a4f);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgb(82 183 136 / 0.4);
+  transform: translateX(0);
+}
+
+.nav-link.active svg { color: #ffffff; }
+
+/* ─── Dark mode surface overrides ───────────────────────── */
+html.dark .ds-card    { background: var(--surface-card); border-color: var(--border-color); }
+html.dark .ds-sidebar { background: var(--surface-sidebar); border-color: var(--border-color); }
+html.dark .ds-topbar  { background: var(--surface-topbar); border-color: var(--border-color); }
+
+/* ─── Global Slate → Nature overrides ───────────────────── */
+/* These catch hardcoded slate-* classes in all detail pages  */
+.text-slate-900, .text-slate-800 { color: var(--text-primary) !important; }
+.text-slate-700, .text-slate-600 { color: var(--text-secondary) !important; }
+.text-slate-500, .text-slate-400 { color: var(--text-muted) !important; }
+
+.bg-slate-50, .bg-slate-100 { background-color: #f0f9f4 !important; }
+.bg-slate-200               { background-color: var(--border-subtle) !important; }
+
+.border-slate-100, .border-slate-200 { border-color: var(--border-subtle) !important; }
+.border-slate-300             { border-color: var(--border-color) !important; }
+
+/* Inline <select> elements in Sales, Workers, Travel pages */
+select {
+  height: 2.75rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  background: var(--surface-input);
+  padding: 0 0.875rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  font-weight: 500;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2352b788' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+select:focus {
+  border-color: #52b788;
+  box-shadow: 0 0 0 4px rgb(45 106 79 / 0.1);
+}
+
+/* ─── Inline stat panels (SettingsPage, detail pages) ───── */
+.rounded-xl.border.border-slate-200.bg-slate-50,
+.rounded-xl.bg-slate-50 {
+  background: linear-gradient(to bottom right, #f0f9f4, #f8fffe) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* ─── Travelling costs / summary panels ─────────────────── */
+.rounded-lg.bg-slate-50 {
+  background: #f0f9f4 !important;
+  border-radius: 1rem !important;
+}
+
+/* ─── Customer server search results panel ───────────────── */
+.rounded-xl.border.border-slate-200.bg-slate-50.p-4 {
+  background: #f0f9f4 !important;
+  border-color: var(--border-color) !important;
+}
+
+/* ─── Hover ring overrides for old focus-ring-slate ─────── */
+.focus\:ring-slate-900\/10:focus { --tw-ring-color: rgb(45 106 79 / 0.1) !important; }
+
+/* ─── "View" links inside table cells ───────────────────── */
+table a {
+  color: var(--brand-primary);
+  font-weight: 700;
+  transition: opacity 0.15s;
+}
+table a:hover { opacity: 0.75; text-decoration: underline; }
+
+/* ─── Page-level section labels ("Module", "Worker" etc.) ── */
+.text-xs.font-semibold.uppercase.tracking-wide.text-slate-600 {
+  color: var(--brand-primary) !important;
+}
+
+/* ─── Modal backdrop for confirm dialogs ─────────────────── */
+.bg-slate-900\/40 {
+  background: rgba(0,0,0,0.5) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* ─── Expense / Report page summary boxes ────────────────── */
+.rounded-xl.border.p-4 {
+  border-color: var(--border-color);
+}
+
+/* ─── Active page animate-in ─────────────────────────────── */
+main > div { animation: fadeIn 0.3s ease both; }
+
